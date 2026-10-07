@@ -2,8 +2,10 @@
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0;
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -11,11 +13,21 @@ body {
         sans-serif;
 
     background: #f5f5f5;
+
+    color: #333;
 }
 
+
+/* ========================================
+   メインコンテナ
+   ======================================== */
+
 .container {
+
     max-width: 700px;
+
     margin: 40px auto;
+
     padding: 30px;
 
     background: white;
@@ -26,75 +38,276 @@ body {
         0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+
+/* ========================================
+   見出し
+   ======================================== */
+
 h1 {
+
     text-align: center;
+
+    margin-top: 0;
+
     margin-bottom: 30px;
 }
+
+
+h2 {
+
+    font-size: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ========================================
+   セクション
+   ======================================== */
 
 section {
+
     margin-bottom: 30px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #ddd;
 }
+
+
+section:last-child {
+
+    border-bottom: none;
+}
+
+
+/* ========================================
+   ラベル
+   ======================================== */
 
 label {
+
     display: block;
+
     margin: 15px 0;
+
+    font-size: 15px;
 }
 
+
+/* ========================================
+   数値入力
+   ======================================== */
+
 input[type="number"] {
+
     width: 100%;
+
     padding: 10px;
 
-    margin-top: 5px;
+    margin-top: 6px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
 
     font-size: 16px;
 }
 
+
+/* ========================================
+   セレクトボックス
+   ======================================== */
+
+select {
+
+    width: 100%;
+
+    padding: 10px;
+
+    margin-top: 6px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    background: white;
+
+    font-size: 16px;
+}
+
+
+/* ========================================
+   チェックボックス
+   ======================================== */
+
 .checkbox {
+
     display: flex;
+
     align-items: center;
+
     gap: 8px;
 }
 
+
+.checkbox input {
+
+    width: 18px;
+
+    height: 18px;
+}
+
+
+/* ========================================
+   スライダー
+   ======================================== */
+
+.range-container {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 6px;
+}
+
+
+.range-container input[type="range"] {
+
+    flex: 1;
+}
+
+
+.range-container span {
+
+    min-width: 40px;
+
+    text-align: right;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   ボタン
+   ======================================== */
+
 button {
+
     width: 100%;
 
-    padding: 14px;
+    padding: 12px 16px;
 
     border: none;
+
     border-radius: 8px;
+
+    background: #333;
+
+    color: white;
 
     font-size: 16px;
 
     cursor: pointer;
-
-    background: #333;
-    color: white;
 }
 
+
 button:hover {
+
     opacity: 0.8;
 }
 
-#problemText {
-    padding: 20px;
 
-    font-size: 24px;
-    text-align: center;
+/* ========================================
+   メインボタン
+   ======================================== */
+
+.main-button {
+
+    padding: 16px;
+
+    font-size: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ========================================
+   音声テストボタン
+   ======================================== */
+
+#testVoiceButton {
+
+    margin-top: 5px;
+
+    background: #666;
+}
+
+
+/* ========================================
+   問題表示
+   ======================================== */
+
+.problem-text {
+
+    min-height: 120px;
+
+    padding: 20px;
 
     background: #f0f0f0;
 
     border-radius: 10px;
+
+    font-size: 22px;
+
+    line-height: 1.8;
+
+    text-align: center;
 }
 
-#answerText {
+
+/* ========================================
+   答え
+   ======================================== */
+
+.answer-text {
+
     padding: 20px;
 
-    font-size: 36px;
+    font-size: 40px;
+
     font-weight: bold;
 
     text-align: center;
 }
 
-#showAnswerButton {
-    background: #555;
+
+/* ========================================
+   スマートフォン対応
+   ======================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+
+        margin: 15px;
+
+        padding: 20px;
+    }
+
+
+    h1 {
+
+        font-size: 24px;
+    }
+
+
+    .problem-text {
+
+        font-size: 18px;
+    }
+
 }

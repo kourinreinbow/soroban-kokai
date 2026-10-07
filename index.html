@@ -15,60 +15,190 @@
 
     <h1>そろばん読み上げ練習</h1>
 
+
+    <!-- ================================ -->
+    <!-- 問題設定 -->
+    <!-- ================================ -->
+
     <section class="settings">
 
-        <h2>設定</h2>
+        <h2>問題設定</h2>
 
         <label>
             最小値
-            <input type="number" id="minima" value="1" min="1">
+            <input
+                type="number"
+                id="minima"
+                value="1"
+                min="1"
+            >
         </label>
+
 
         <label>
             最大値
-            <input type="number" id="maxabs" value="999" min="1">
+            <input
+                type="number"
+                id="maxabs"
+                value="999"
+                min="1"
+            >
         </label>
+
 
         <label>
             数字の個数
-            <input type="number" id="numCount" value="7" min="1" max="50">
+            <input
+                type="number"
+                id="numCount"
+                value="7"
+                min="1"
+                max="50"
+            >
         </label>
 
+
         <label class="checkbox">
-            <input type="checkbox" id="allowSubtraction" checked>
+            <input
+                type="checkbox"
+                id="allowSubtraction"
+                checked
+            >
+
             引き算を許可する
         </label>
 
-        <label class="checkbox">
-            <input type="checkbox" id="generateAudio" checked>
-            音声を再生する
+    </section>
+
+
+    <!-- ================================ -->
+    <!-- 音声設定 -->
+    <!-- ================================ -->
+
+    <section class="voice-settings">
+
+        <h2>音声設定</h2>
+
+
+        <label>
+            音声
+
+            <select id="voiceSelect">
+                <option value="">
+                    音声を読み込み中...
+                </option>
+            </select>
         </label>
 
-        <button id="generateButton">
+
+        <label>
+            読み上げ速度
+
+            <div class="range-container">
+
+                <input
+                    type="range"
+                    id="speechRate"
+                    min="0.5"
+                    max="2.0"
+                    step="0.1"
+                    value="0.9"
+                >
+
+                <span id="speechRateValue">
+                    0.9
+                </span>
+
+            </div>
+
+        </label>
+
+
+        <label>
+            音程
+
+            <div class="range-container">
+
+                <input
+                    type="range"
+                    id="speechPitch"
+                    min="0.5"
+                    max="2.0"
+                    step="0.1"
+                    value="1.0"
+                >
+
+                <span id="speechPitchValue">
+                    1.0
+                </span>
+
+            </div>
+
+        </label>
+
+
+        <button id="testVoiceButton">
+            音声をテスト
+        </button>
+
+
+        <label class="checkbox">
+
+            <input
+                type="checkbox"
+                id="generateAudio"
+                checked
+            >
+
+            問題生成時に自動で読み上げる
+
+        </label>
+
+    </section>
+
+
+    <!-- ================================ -->
+    <!-- 問題生成 -->
+    <!-- ================================ -->
+
+    <section class="problem-section">
+
+        <button
+            id="generateButton"
+            class="main-button"
+        >
             問題を生成
         </button>
 
-    </section>
-
-
-    <section class="problem">
 
         <h2>問題</h2>
 
-        <div id="problemText">
+
+        <div id="problemText" class="problem-text">
+
             「問題を生成」を押してください
+
         </div>
 
     </section>
 
 
-    <section class="answer">
+    <!-- ================================ -->
+    <!-- 答え -->
+    <!-- ================================ -->
+
+    <section class="answer-section">
 
         <h2>答え</h2>
 
-        <div id="answerText">
-            -
+
+        <div
+            id="answerText"
+            class="answer-text"
+        >
+            ？
         </div>
+
 
         <button id="showAnswerButton">
             答えを表示
@@ -77,6 +207,7 @@
     </section>
 
 </div>
+
 
 <script src="script.js"></script>
 
