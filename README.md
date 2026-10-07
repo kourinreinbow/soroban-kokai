@@ -1,28 +1,25 @@
-<<<<<<< HEAD
-# Image Recognition Demo
+# そろばん読み上げ練習
 
-ブラウザ上で動作する簡単な画像認識デモです。
+ブラウザ上でランダムな加減算問題を生成し、
+日本語音声で読み上げる簡単なそろばん練習アプリです。
 
 ## 機能
 
-- 画像ファイルの選択
-- 選択した画像のプレビュー
-- ファイル名・サイズ・MIME typeの表示
-
-## 起動方法
-
-`index.html` をブラウザで開くだけで動作します。
+- 数字の最小値・最大値を設定
+- 問題数を設定
+- 引き算の有無を設定
+- 音声読み上げのON/OFF
+- ランダムな加減算問題の生成
+- 答えの表示
+- ブラウザ標準の音声合成APIによる読み上げ
 
 ## ディレクトリ構成
 
 ```text
-image-recognition-demo/
+soroban-reading/
 ├── index.html
 ├── style.css
 ├── script.js
 ├── README.md
 └── assets/
-    └── sample.jpg
-=======
-"# soroban_kokai" 
->>>>>>> origin/main
+    └── icon.png

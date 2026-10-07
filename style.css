@@ -1,35 +1,100 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    font-family: sans-serif;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
     background: #f5f5f5;
 }
 
 .container {
-    max-width: 800px;
-    margin: 50px auto;
+    max-width: 700px;
+    margin: 40px auto;
     padding: 30px;
+
     background: white;
-    border-radius: 12px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.preview {
-    margin-top: 20px;
+section {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 15px 0;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+
+    margin-top: 5px;
+
+    font-size: 16px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+button {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    background: #333;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#problemText {
+    padding: 20px;
+
+    font-size: 24px;
+    text-align: center;
+
+    background: #f0f0f0;
+
+    border-radius: 10px;
+}
+
+#answerText {
+    padding: 20px;
+
+    font-size: 36px;
+    font-weight: bold;
+
     text-align: center;
 }
 
-#previewImage {
-    max-width: 100%;
-    max-height: 500px;
-    display: none;
-}
-
-#result {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f0f0f0;
-    border-radius: 8px;
+#showAnswerButton {
+    background: #555;
 }

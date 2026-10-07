@@ -3,29 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>画像認識デモ</title>
+
+    <title>そろばん読み上げ練習</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <main class="container">
-        <h1>画像認識デモ</h1>
 
-        <p>
-            画像を選択すると、画像の情報を表示します。
-        </p>
+<div class="container">
 
-        <input type="file" id="imageInput" accept="image/*">
+    <h1>そろばん読み上げ練習</h1>
 
-        <div class="preview">
-            <img id="previewImage" alt="プレビュー">
+    <section class="settings">
+
+        <h2>設定</h2>
+
+        <label>
+            最小値
+            <input type="number" id="minima" value="1" min="1">
+        </label>
+
+        <label>
+            最大値
+            <input type="number" id="maxabs" value="999" min="1">
+        </label>
+
+        <label>
+            数字の個数
+            <input type="number" id="numCount" value="7" min="1" max="50">
+        </label>
+
+        <label class="checkbox">
+            <input type="checkbox" id="allowSubtraction" checked>
+            引き算を許可する
+        </label>
+
+        <label class="checkbox">
+            <input type="checkbox" id="generateAudio" checked>
+            音声を再生する
+        </label>
+
+        <button id="generateButton">
+            問題を生成
+        </button>
+
+    </section>
+
+
+    <section class="problem">
+
+        <h2>問題</h2>
+
+        <div id="problemText">
+            「問題を生成」を押してください
         </div>
 
-        <div id="result">
-            画像が選択されていません。
-        </div>
-    </main>
+    </section>
 
-    <script src="script.js"></script>
+
+    <section class="answer">
+
+        <h2>答え</h2>
+
+        <div id="answerText">
+            -
+        </div>
+
+        <button id="showAnswerButton">
+            答えを表示
+        </button>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
