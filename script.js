@@ -382,11 +382,11 @@ function generateProblem() {
 
             if (i < numCount-1)
                 textParts.push(
-                    `${rand}円では`
+                    `${rand}円なり`
                 );
             else{
                 textParts.push(
-                    `${rand}円なり`
+                    `${rand}円では`
                 );
             }
 
