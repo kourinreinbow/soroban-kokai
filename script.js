@@ -380,16 +380,10 @@ function generateProblem() {
 
             currentSum += rand;
 
-            if (i < numCount-1)
-                textParts.push(
-                    `${rand}円なり`
-                );
-            else{
-                textParts.push(
-                    `${rand}円では`
-                );
-            }
 
+            textParts.push(
+                `${rand}円なり`
+            );
 
 
             lastOperation = "add";
@@ -448,15 +442,23 @@ function generateProblem() {
             if (
                 lastOperation !== "sub"
             ) {
-
+                if (i < numCount-1)            
                 textParts.push(
                     `引いては${rand}円なり`
                 );
+                else
+                textParts.push(
+                    `引いては${rand}円では`
+                );
 
             } else {
-
+                if (i < numCount-1)            
                 textParts.push(
                     `${rand}円なり`
+                );
+                else
+                textParts.push(
+                    `${rand}円では`
                 );
             }
 
@@ -490,13 +492,21 @@ function generateProblem() {
             if (
                 lastOperation !== "add"
             ) {
-
+                if (i < numCount-1)            
                 textParts.push(
                     `加えては${rand}円なり`
                 );
+                else
+                textParts.push(
+                    `加えては${rand}円では`
+                );
 
             } else {
-
+                if (i < numCount-1)            
+                textParts.push(
+                    `${rand}円なり`
+                );
+                else
                 textParts.push(
                     `${rand}円なり`
                 );
