@@ -230,7 +230,7 @@ function speak(text) {
 function testVoice() {
 
     speak(
-        "願いましては、三百四十二円なり。"
+        "こちらはテスト音声です"
     );
 }
 
@@ -380,10 +380,16 @@ function generateProblem() {
 
             currentSum += rand;
 
+            if (i < numCount-1)
+                textParts.push(
+                    `${rand}円では`
+                );
+            else{
+                textParts.push(
+                    `${rand}円なり`
+                );
+            }
 
-            textParts.push(
-                `${rand}円なり`
-            );
 
 
             lastOperation = "add";
