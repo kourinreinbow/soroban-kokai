@@ -508,7 +508,7 @@ function generateProblem() {
                 );
                 else
                 textParts.push(
-                    `${rand}円なり`
+                    `${rand}円では`
                 );
             }
 
