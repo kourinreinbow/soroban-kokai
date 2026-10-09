@@ -7,6 +7,14 @@ let currentAnswer = null;
 let currentTextParts = [];
 
 let japaneseVoices = [];
+let lastSpeechText = "";
+let currentUtterance = null;
+
+const replayButton = document.getElementById("replayButton");
+const pauseButton = document.getElementById("pauseButton");
+const resumeButton = document.getElementById("resumeButton");
+const stopButton = document.getElementById("stopButton");
+const playbackStatus = document.getElementById("playbackStatus");
 
 
 // ========================================
@@ -141,87 +149,61 @@ speechPitch.addEventListener(
 // 音声読み上げ
 // ========================================
 
-function speak(text) {
+function updatePlaybackControls(state) {
+    const hasText = lastSpeechText.length > 0;
+    replayButton.disabled = !hasText;
+    pauseButton.disabled = !hasText || state !== "playing";
+    resumeButton.disabled = !hasText || state !== "paused";
+    stopButton.disabled = !hasText || state === "stopped" || state === "ended";
 
+    const messages = {
+        ready: "音声を再生できます。",
+        playing: "音声を再生中です。",
+        paused: "音声を一時停止中です。",
+        stopped: "音声を停止しました。「最初から再生」で再生できます。",
+        ended: "読み上げが終了しました。「最初から再生」で再度聞けます。"
+    };
+    playbackStatus.textContent = messages[state] || messages.ready;
+}
+
+function speak(text, saveAsLast = true) {
     if (!window.speechSynthesis) {
-
-        alert(
-            "このブラウザは音声読み上げに対応していません。"
-        );
-
+        alert("このブラウザは音声読み上げに対応していません。");
         return;
     }
 
-
-    // 現在の読み上げを停止
-
+    if (saveAsLast) lastSpeechText = text;
     speechSynthesis.cancel();
 
+    const voices = speechSynthesis.getVoices()
+        .filter(voice => voice.lang.toLowerCase().startsWith("ja"));
+    const selectedVoice = voices[Number(voiceSelect.value)];
 
-    // 音声一覧を取得
-
-    const voices =
-        speechSynthesis
-            .getVoices()
-            .filter(voice =>
-                voice.lang
-                    .toLowerCase()
-                    .startsWith("ja")
-            );
-
-
-    const selectedIndex =
-        Number(voiceSelect.value);
-
-
-    const selectedVoice =
-        voices[selectedIndex];
-
-
-    // 音声オブジェクト作成
-
-    const utterance =
-        new SpeechSynthesisUtterance(text);
-
-
-    // 日本語
-
+    const utterance = new SpeechSynthesisUtterance(text);
+    currentUtterance = utterance;
     utterance.lang = "ja-JP";
-
-
-    // 選択された音声
-
-    if (selectedVoice) {
-
-        utterance.voice =
-            selectedVoice;
-    }
-
-
-    // 読み上げ速度
-
-    utterance.rate =
-        Number(speechRate.value);
-
-
-    // 音程
-
-    utterance.pitch =
-        Number(speechPitch.value);
-
-
-    // 音量
-
+    if (selectedVoice) utterance.voice = selectedVoice;
+    utterance.rate = Number(speechRate.value);
+    utterance.pitch = Number(speechPitch.value);
     utterance.volume = 1.0;
 
+    utterance.onstart = () => updatePlaybackControls("playing");
+    utterance.onpause = () => updatePlaybackControls("paused");
+    utterance.onresume = () => updatePlaybackControls("playing");
+    utterance.onend = () => {
+        if (currentUtterance === utterance) updatePlaybackControls("ended");
+    };
+    utterance.onerror = (event) => {
+        if (currentUtterance === utterance &&
+            event.error !== "canceled" && event.error !== "interrupted") {
+            playbackStatus.textContent = "音声の再生中にエラーが発生しました。";
+            updatePlaybackControls("ready");
+        }
+    };
 
-    // 読み上げ
-
-    speechSynthesis.speak(
-        utterance
-    );
+    updatePlaybackControls("ready");
+    speechSynthesis.speak(utterance);
 }
-
 
 // ========================================
 // 音声テスト
@@ -242,6 +224,36 @@ document
         testVoice
     );
 
+
+// ========================================
+// 音声再生コントロール
+// ========================================
+
+replayButton.addEventListener("click", () => {
+    if (lastSpeechText) speak(lastSpeechText, false);
+});
+
+pauseButton.addEventListener("click", () => {
+    if (window.speechSynthesis && speechSynthesis.speaking && !speechSynthesis.paused) {
+        speechSynthesis.pause();
+        updatePlaybackControls("paused");
+    }
+});
+
+resumeButton.addEventListener("click", () => {
+    if (window.speechSynthesis && speechSynthesis.paused) {
+        speechSynthesis.resume();
+        updatePlaybackControls("playing");
+    }
+});
+
+stopButton.addEventListener("click", () => {
+    if (window.speechSynthesis) {
+        speechSynthesis.cancel();
+        currentUtterance = null;
+        updatePlaybackControls("stopped");
+    }
+});
 
 // ========================================
 // 問題生成
@@ -554,6 +566,13 @@ function generateProblem() {
 
 
     // ------------------------------------
+    // 音声読み上げ用テキストを保存
+    // ------------------------------------
+
+    lastSpeechText = textParts.join("、");
+    updatePlaybackControls("ready");
+
+    // ------------------------------------
     // 音声読み上げ
     // ------------------------------------
 
@@ -568,13 +587,7 @@ function generateProblem() {
          * ここでは「、」を入れて自然な間を作ります。
          */
 
-        const speechText =
-            textParts.join("、");
-
-
-        speak(
-            speechText
-        );
+        speak(lastSpeechText, false);
     }
 
 
